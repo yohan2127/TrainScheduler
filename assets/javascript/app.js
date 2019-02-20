@@ -54,22 +54,6 @@ $("#add-train").on("click", function() {
     date = moment(new Date())
     datetime.html(date.format('hh:mm a'));
 	
-	
-	
-	
-	
-	
-	/*
-	var firstTrainNew = moment(childSnapshot.val().firstTrain, "hh:mm").subtract(1, "years");
-        // Difference between the current and firstTrain
-        var diffTime = moment().diff(moment(firstTrainNew), "minutes");
-        var remainder = diffTime % childSnapshot.val().frequency;
-        // Minutes until next train
-        var minAway = childSnapshot.val().frequency - remainder;
-        // Next train time
-        var nextTrain = moment().add(minAway, "minutes");
-        nextTrain = moment(nextTrain).format("hh:mm");///*/
-
   }
 
   // Code for handling the push
@@ -94,23 +78,6 @@ $("#add-train").on("click", function() {
   // Don't refresh the page!
   return false; 
 });
-
-// Delete function
-// $(document).on("click", ".delete", function(){
-//   var confirmDelete = confirm("Are you sure you want to delete this entry?");
-  
-//    if (confirmDelete){
-//     var entry = $(this).attr("data-index");
-//     database.ref().child(trainIDs[entry]).remove();
-//     location.reload();
-//    } else{
-//      return false;
-//    }
-  
-// });
-
-// Firebase watcher + initial loader HINT: This code behaves similarly to .on("child_added")
-// This will only show the 25 latest entries
   database.ref().orderByChild("dateAdded").limitToLast(25).on("child_added", function(snapshot) {
 
 
@@ -129,8 +96,6 @@ $("#add-train").on("click", function() {
     "<td>" + "Every " + snapshot.val().frequency + " mins" + "</td>" + 
     "<td>" + snapshot.val().nextArrival + "</td>" +
     "<td>" + snapshot.val().minutesAway + " mins until arrival" + "</td>" +
-   // "<td><button class='delete btn btn-default btn-sm' data-index='" + index + "'><span class='glyphicon glyphicon-trash'></span></button> " + 
-   // "<button type='button' class='btn btn-default btn-sm'><span class='glyphicon glyphicon-edit'></span></button>" +
     "</td></tr>");
 
   index++;
