@@ -26,12 +26,22 @@ var database = firebase.database();
 var update = function () {
   date = moment(new Date())
   datetime.html(date.format('dddd, MMMM Do YYYY, h:mm:ss a'));
-};
+  var secondsNow = moment().format("ss");
 
+  if(secondsNow == "00"){
+    //alert(secondsNow);
+  }
+};
+database.ref().on("value", function(snapshot) {
+  data = snapshot.val();
+  refreshTable();
+
+});
 $(document).ready(function(){
   datetime = $('#current-status')
   update();
   setInterval(update, 1000);
+  
 });
 $(document).ready(function() {
 
@@ -67,6 +77,10 @@ $(document).ready(function() {
      });
   
      database.ref().on("child_added", function(childSnapshot) {
+		 
+		 
+		 
+		 
 		$('#new-train').append("<tr class='table-row' id=" + "'" + childSnapshot.key + "'" + ">" +
                "<td class='col-xs-3'>" + childSnapshot.val().name +
                "</td>" +
